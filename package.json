@@ -5,10 +5,13 @@
   "scripts": {
     "dev:community": "slidev community/slides.md --open",
     "dev:redhat-hyundai": "slidev redhat-hyundai/slides.md --open",
+    "dev:roadmap-2026-q4": "slidev roadmap-2026-q4/slides.md --open",
     "build:community": "slidev build community/slides.md",
     "build:redhat-hyundai": "slidev build redhat-hyundai/slides.md",
+    "build:roadmap-2026-q4": "slidev build roadmap-2026-q4/slides.md",
     "export:community": "slidev export community/slides.md",
-    "export:redhat-hyundai": "slidev export redhat-hyundai/slides.md"
+    "export:redhat-hyundai": "slidev export redhat-hyundai/slides.md",
+    "export:roadmap-2026-q4": "slidev export roadmap-2026-q4/slides.md"
   },
   "dependencies": {
     "@slidev/cli": "^53.0.0",
