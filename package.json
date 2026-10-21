@@ -1,11 +1,14 @@
 {
-  "name": "slidev",
+  "name": "jumpstarter-slides",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build",
-    "dev": "slidev --open",
-    "export": "slidev export"
+    "dev:community": "slidev community/slides.md --open",
+    "dev:redhat-hyundai": "slidev redhat-hyundai/slides.md --open",
+    "build:community": "slidev build community/slides.md",
+    "build:redhat-hyundai": "slidev build redhat-hyundai/slides.md",
+    "export:community": "slidev export community/slides.md",
+    "export:redhat-hyundai": "slidev export redhat-hyundai/slides.md"
   },
   "dependencies": {
     "@slidev/cli": "^53.0.0",
