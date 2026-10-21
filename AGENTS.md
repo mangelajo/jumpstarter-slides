@@ -36,7 +36,12 @@ Each presentation directory contains:
    ln -s ../../common/images my-event/public/images
    ```
 3. If the deck needs its own images (partner logos, event branding), put them directly in `my-event/public/images/` alongside the symlink. Use a subdirectory or direct files — avoid naming conflicts with `common/images/`.
-4. Create `my-event/slides.md` starting with frontmatter, then a custom title slide, then `src:` imports for whichever common modules are needed:
+4. Add a `my-event/vite.config.ts` disabling strict fs mode (required — slidev ≥ 52.17.2's import guard resolves symlinked `public/` images via realpath and rejects them; copy the one from `community/`):
+   ```ts
+   import { defineConfig } from 'vite'
+   export default defineConfig({ server: { fs: { strict: false } } })
+   ```
+5. Create `my-event/slides.md` starting with frontmatter, then a custom title slide, then `src:` imports for whichever common modules are needed:
    ```markdown
    ---
    theme: default
@@ -55,9 +60,9 @@ Each presentation directory contains:
    src: ../common/slides/introducing.md
    ---
    ```
-5. Add Makefile targets following the existing pattern (copy a `dev-*` / `build-*` / `export-*` triplet)
-6. Add corresponding npm scripts in `package.json`
-7. The available common slide modules are:
+6. Add Makefile targets following the existing pattern (copy a `dev-*` / `build-*` / `export-*` triplet)
+7. Add corresponding npm scripts in `package.json`
+8. The available common slide modules are:
    - `challenges.md` — "Testing is Hard", key challenges grid, "Solved in Software"
    - `what-is-hil.md` — HiL definition, HiL landscape challenges vs solutions
    - `introducing.md` — "Introducing Jumpstarter", what it is, how it works (3 pillars)
