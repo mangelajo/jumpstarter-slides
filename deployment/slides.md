@@ -739,7 +739,7 @@ flowchart LR
     end
 
     CONTROLLER@{ icon: "logos:kubernetes", form: "rounded", label: "Jumpstarter resources", h: 40 }
-    FLIGHTCTL@{ img: "/images/flightctl-icon.png", label: "FlightCTL / RHEM", h: 48, constraint: "on" }
+    FLIGHTCTL@{ icon: "jumpstarter:flightctl", form: "rounded", label: "FlightCTL / RHEM", h: 48, constraint: "on" }
     SIDEKICK@{ icon: "mdi:server", form: "rounded", label: "Sidekick / exporter host", h: 40 }
     EXPORTERS@{ icon: "jumpstarter:icon", form: "rounded", label: "Running exporters", h: 40 }
 
