@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jumpstarter Slides</title>
+  <link rel="icon" href="./images/jumpstarter-icon.png">
+  <style>
+    :root {
+      --bg: #f0f0f0;
+      --ink: #1a1a1a;
+      --muted: #555;
+      --accent: #ffc107;
+      --card: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Nunito Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #fff8e1 0%, var(--bg) 42%, var(--bg) 100%);
+    }
+    main {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+    }
+    header {
+      margin-bottom: 2.5rem;
+    }
+    header img {
+      height: 2.75rem;
+      width: auto;
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+    a.deck {
+      display: block;
+      padding: 1rem 1.15rem;
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+    }
+    a.deck:hover,
+    a.deck:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+      outline: none;
+    }
+    a.deck strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+    a.deck span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer {
+      margin-top: 2.5rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <img src="./images/jumpstarter-logo.svg" alt="Jumpstarter">
+      <h1>Presentations</h1>
+      <p>Static Slidev builds for Jumpstarter talks and workshops.</p>
+    </header>
+    <ul>
+      <li>
+        <a class="deck" href="./community/">
+          <strong>Community overview</strong>
+          <span>Cloud-native hardware-in-the-loop testing</span>
+        </a>
+      </li>
+      <li>
+        <a class="deck" href="./deployment/">
+          <strong>Deployment</strong>
+          <span>Operation modes, services, exporters, production readiness</span>
+        </a>
+      </li>
+      <li>
+        <a class="deck" href="./roadmap-2026-q4/">
+          <strong>Roadmap 2026 Q4</strong>
+          <span>Near-term priorities and planned work</span>
+        </a>
+      </li>
+      <li>
+        <a class="deck" href="./redhat-hyundai/">
+          <strong>Red Hat + Hyundai</strong>
+          <span>Co-branded overview deck</span>
+        </a>
+      </li>
+    </ul>
+    <footer>
+      <a href="https://jumpstarter.dev">jumpstarter.dev</a>
+      ·
+      <a href="https://github.com/mangelajo/jumpstarter-slides">source</a>
+    </footer>
+  </main>
+</body>
+</html>

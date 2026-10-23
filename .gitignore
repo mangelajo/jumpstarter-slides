@@ -1,9 +1,9 @@
 node_modules
 .DS_Store
 dist
+site
 *.local
 .vite-inspect
 .remote-assets
 components.d.ts
 slides-export.pdf
-package-lock.json
