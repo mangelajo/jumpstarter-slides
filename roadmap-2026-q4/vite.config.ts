@@ -8,6 +8,9 @@ export default defineConfig({
   server: {
     fs: {
       strict: false
-    }
+    },
+    // Quick tunnels (cloudflared/ngrok) get a random hostname on every run,
+    // so a fixed allowedHosts list would break each restart.
+    allowedHosts: true
   }
 })

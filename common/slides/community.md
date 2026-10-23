@@ -19,7 +19,7 @@ class: text-center
 
 <div class="text-center">
   <div class="text-5xl mb-3">💬</div>
-  <span class="text-blue-400 font-bold">Matrix Chat</span>
+  <a href="https://matrix.to/#/#jumpstarter:matrix.org" class="text-blue-400 font-bold">Matrix Chat</a>
 </div>
 
 </div>

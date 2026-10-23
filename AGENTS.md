@@ -8,6 +8,7 @@ This repo contains [Slidev](https://sli.dev/) presentation decks for the [Jumpst
 common/
   slides/         Reusable slide modules imported via Slidev `src:` directives
   images/         Shared images (logos, diagrams, board photos)
+  setup/          Shared Slidev setup (e.g. Mermaid icon packs)
 community/        Generic community presentation (no partner branding)
 redhat-hyundai/   Co-branded Red Hat + Hyundai Motor Group presentation
 ```
@@ -15,6 +16,7 @@ redhat-hyundai/   Co-branded Red Hat + Hyundai Motor Group presentation
 Each presentation directory contains:
 - `slides.md` — the deck entry point with frontmatter config and a custom title slide, followed by `src:` imports from `common/slides/`
 - `public/images/` — symlinked to `common/images/` for shared assets, plus any deck-specific images (e.g., partner logos)
+- `setup/mermaid.ts` — symlinked to `common/setup/mermaid.ts` (Mermaid Iconify packs; Slidev loads `setup/` from the deck directory)
 
 ## How Slidev works
 
@@ -35,13 +37,18 @@ Each presentation directory contains:
    mkdir -p my-event/public
    ln -s ../../common/images my-event/public/images
    ```
-3. If the deck needs its own images (partner logos, event branding), put them directly in `my-event/public/images/` alongside the symlink. Use a subdirectory or direct files — avoid naming conflicts with `common/images/`.
-4. Add a `my-event/vite.config.ts` disabling strict fs mode (required — slidev ≥ 52.17.2's import guard resolves symlinked `public/` images via realpath and rejects them; copy the one from `community/`):
+3. Symlink shared Mermaid setup (required for icons in Mermaid diagrams):
+   ```bash
+   mkdir -p my-event/setup
+   ln -s ../../common/setup/mermaid.ts my-event/setup/mermaid.ts
+   ```
+4. If the deck needs its own images (partner logos, event branding), put them directly in `my-event/public/images/` alongside the symlink. Use a subdirectory or direct files — avoid naming conflicts with `common/images/`.
+5. Add a `my-event/vite.config.ts` disabling strict fs mode (required — slidev ≥ 52.17.2's import guard resolves symlinked `public/` images via realpath and rejects them; copy the one from `community/`):
    ```ts
    import { defineConfig } from 'vite'
    export default defineConfig({ server: { fs: { strict: false } } })
    ```
-5. Create `my-event/slides.md` starting with frontmatter, then a custom title slide, then `src:` imports for whichever common modules are needed:
+6. Create `my-event/slides.md` starting with frontmatter, then a custom title slide, then `src:` imports for whichever common modules are needed:
    ```markdown
    ---
    theme: default
@@ -60,9 +67,9 @@ Each presentation directory contains:
    src: ../common/slides/introducing.md
    ---
    ```
-6. Add Makefile targets following the existing pattern (copy a `dev-*` / `build-*` / `export-*` triplet)
-7. Add corresponding npm scripts in `package.json`
-8. The available common slide modules are:
+7. Add Makefile targets following the existing pattern (copy a `dev-*` / `build-*` / `export-*` triplet)
+8. Add corresponding npm scripts in `package.json`
+9. The available common slide modules are:
    - `challenges.md` — "Testing is Hard", key challenges grid, "Solved in Software"
    - `what-is-hil.md` — HiL definition, HiL landscape challenges vs solutions
    - `introducing.md` — "Introducing Jumpstarter", what it is, how it works (3 pillars)

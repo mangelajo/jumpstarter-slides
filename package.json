@@ -6,14 +6,20 @@
     "dev:community": "slidev community/slides.md --open",
     "dev:redhat-hyundai": "slidev redhat-hyundai/slides.md --open",
     "dev:roadmap-2026-q4": "slidev roadmap-2026-q4/slides.md --open",
+    "dev:deployment": "slidev deployment/slides.md --open",
     "build:community": "slidev build community/slides.md",
     "build:redhat-hyundai": "slidev build redhat-hyundai/slides.md",
     "build:roadmap-2026-q4": "slidev build roadmap-2026-q4/slides.md",
+    "build:deployment": "slidev build deployment/slides.md",
     "export:community": "slidev export community/slides.md",
     "export:redhat-hyundai": "slidev export redhat-hyundai/slides.md",
-    "export:roadmap-2026-q4": "slidev export roadmap-2026-q4/slides.md"
+    "export:roadmap-2026-q4": "slidev export roadmap-2026-q4/slides.md",
+    "export:deployment": "slidev export deployment/slides.md"
   },
   "dependencies": {
+    "@iconify-json/logos": "^1.2.17",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.100",
     "@slidev/cli": "^53.0.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
