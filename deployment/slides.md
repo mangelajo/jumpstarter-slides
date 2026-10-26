@@ -270,6 +270,23 @@ Distributed mode needs working clients, a **service**, the **exporter fleet**, a
 layout: default
 ---
 
+# A sneak peek at the RHIVOS Lab
+
+Around 60 devices, being live migrated from BOS to RDU,
+avoiding downtime and keeping the lab running.
+
+Cluster services run in ROSA, us-east.
+
+<div class="grid grid-cols-3 gap-4 mt-4">
+  <img src="/images/20261015_102558.jpg" alt="RHIVOS lab overview with racks and banner" class="w-full h-72 object-cover rounded-lg shadow" />
+  <img src="/images/20261015_102947.jpg" alt="Wire rack with development boards and dense cabling" class="w-full h-72 object-cover rounded-lg shadow" />
+  <img src="/images/20261015_103122.jpg" alt="AA3 rack with boards and ESD attention sign" class="w-full h-72 object-cover rounded-lg shadow" />
+</div>
+
+---
+layout: default
+---
+
 # What are the options for running the service?
 
 <div class="grid grid-cols-3 gap-6 mt-8 text-sm">
@@ -520,6 +537,41 @@ spec:
 layout: default
 ---
 
+# ArgoCD: Managing Jumpstarter via Operator
+
+<div class="flex justify-center mt-8">
+
+```mermaid {scale: 0.7}
+flowchart LR
+    GIT@{ icon: "logos:git-icon", form: "rounded", label: "Git repository", h: 40 }
+    ARGOCD@{ icon: "logos:argo", form: "rounded", label: "ArgoCD/OpenShift GitOps", h: 80 }
+    GIT --> ARGOCD
+    OPERATOR@{ icon: "jumpstarter:icon", form: "rounded", label: "Jumpstarter Operator", h: 40 }
+    JUMPSTARTERCR@{ icon: "mdi:file-code", form: "rounded", label: "Jumpstarter CR", h: 40 }
+    OIDC@{ icon: "simple-icons:keycloak", form: "rounded", label: "Keycloak/DEX", h: 40 }
+    CONTROLLER@{ icon: "jumpstarter:icon", form: "rounded", label: "Controller", h: 40 }
+    ROUTER@{ icon: "jumpstarter:router", form: "rounded", label: "Router", h: 40 }
+    METRICS@{ icon: "mdi:chart-line", form: "rounded", label: "Metric collector", h: 40 }
+    CERTS@{ icon: "mdi:certificate", form: "rounded", label: "Certificates", h: 40 }
+
+    ARGOCD --> OPERATOR
+    ARGOCD --> JUMPSTARTERCR
+    ARGOCD --> OIDC
+    JUMPSTARTERCR --> OPERATOR
+    OPERATOR --> CONTROLLER
+    OPERATOR --> ROUTER
+    OPERATOR --> METRICS
+    OPERATOR --> CERTS
+```
+
+</div>
+
+
+
+---
+layout: default
+---
+
 # Notes on Networking: DNS, HTTP/2 and TLS
 
 Jumpstarter is very minimalistic in terms of networking requirements for clients and exporters, but the services need to meet some requirements.
@@ -599,18 +651,16 @@ layoutClass: gap-x-8
 class: text-sm
 ---
 
-# Operate Exporter Hosts Near the Hardware
+# Exporter Hosts Near the Hardware
 
 ::left::
 
-### Host and process lifecycle
+### Exporter hosts
 
-- Use a single-board computer, lab server, or CI runner with the required interfaces.
-- A host can run multiple exporters for **different** devices; do not configure competing control of the same DUT.
-- Install the driver packages referenced by each exporter configuration.
-- Run under systemd or a Podman Quadlet with automatic restart; exporter processes can exit after a session or an error.
-- For containers, configure device/config mounts and any required host networking; review privileged-mode access carefully.
-
+- **ExporterHost** is the linux host that runs the jumpstarter Exporter service and interfaces to the DUT.
+- An ExporterHost can run multiple exporters, but we recommend 1 (1:1).
+- The exporter service runs as a quadlet on systemd.
+ <img src="/images/20261015_111333.jpg" alt="RHIVOS lab overview with racks and banner" class="w-full h-72 object-cover rounded-lg shadow" />
 ::right::
 
 ### Reset the bench at lease boundaries
@@ -636,38 +686,6 @@ Direct: hooks run at exporter startup/shutdown, **not per connection**.
 ::bottom::
 
 <p class="text-xs opacity-60">Sources: <a href="https://jumpstarter.dev/main/introduction/exporters.html">Exporters</a> · <a href="https://jumpstarter.dev/main/introduction/hooks.html">Hooks</a> · <a href="https://jumpstarter.dev/main/getting-started/configuration/files.html">Service/Quadlet configuration</a> · <a href="https://jumpstarter.dev/main/getting-started/guides/setup/direct-mode.html">Direct lifecycle</a></p>
----
-layout: default
----
-
-# ArgoCD: Managing Jumpstarter via Operator
-
-<div class="flex justify-center mt-8">
-
-```mermaid {scale: 0.7}
-flowchart LR
-    GIT@{ icon: "logos:git-icon", form: "rounded", label: "Git repository", h: 40 }
-    ARGOCD@{ icon: "logos:argo", form: "rounded", label: "ArgoCD/OpenShift GitOps", h: 80 }
-    GIT --> ARGOCD
-    OPERATOR@{ icon: "jumpstarter:icon", form: "rounded", label: "Jumpstarter Operator", h: 40 }
-    JUMPSTARTERCR@{ icon: "mdi:file-code", form: "rounded", label: "Jumpstarter CR", h: 40 }
-    OIDC@{ icon: "simple-icons:keycloak", form: "rounded", label: "Keycloak/DEX", h: 40 }
-    CONTROLLER@{ icon: "jumpstarter:icon", form: "rounded", label: "Controller", h: 40 }
-    ROUTER@{ icon: "jumpstarter:router", form: "rounded", label: "Router", h: 40 }
-    METRICS@{ icon: "mdi:chart-line", form: "rounded", label: "Metric collector", h: 40 }
-    CERTS@{ icon: "mdi:certificate", form: "rounded", label: "Certificates", h: 40 }
-
-    ARGOCD --> OPERATOR
-    ARGOCD --> JUMPSTARTERCR
-    ARGOCD --> OIDC
-    JUMPSTARTERCR --> OPERATOR
-    OPERATOR --> CONTROLLER
-    OPERATOR --> ROUTER
-    OPERATOR --> METRICS
-    OPERATOR --> CERTS
-```
-
-</div>
 
 ---
 layout: default
@@ -753,43 +771,6 @@ flowchart LR
 ```
 
 </div>
----
-layout: default
----
-
-# Virtual Targets: Choose Where Compute Lives
-
-<div class="grid grid-cols-3 gap-6 mt-6 text-sm">
-
-<div class="border-l-3 border-[#ffc107] pl-4">
-  <h3 class="font-bold text-lg">QEMU in the cluster</h3>
-  <p><code>qemu.jumpstarter.dev</code></p>
-  <p>Container-based exporter/runtime deployment; use suitable cluster nodes and device access for acceleration.</p>
-</div>
-
-<div class="border-l-3 border-[#ffc107] pl-4">
-  <h3 class="font-bold text-lg">QEMU on lab hosts</h3>
-  <p><code>qemu-ssh.jumpstarter.dev</code></p>
-  <p>SSH provisions Podman Quadlets on external hosts. Requires Podman, systemd, SSH keys, and optionally KVM.</p>
-</div>
-
-<div class="border-l-3 border-[#ffc107] pl-4">
-  <h3 class="font-bold text-lg">KubeVirt / OpenShift Virtualization</h3>
-  <p><code>kubevirt.jumpstarter.dev</code></p>
-  <p>VMs can run on a separate target cluster; exporter pods stay on the management cluster. Requires target kubeconfig credentials.</p>
-</div>
-
-</div>
-
-<div class="mt-6 text-sm">
-
-- **VirtualTargetClass** defines the backend, shared parameters, and credentials reference.
-- **ExporterSet** defines the pool: minimum/maximum replicas, warm spare capacity, cooldown, and recycling policy.
-- Users still select and lease an exporter; compute placement is transparent to that workflow.
-
-</div>
-
-<div class="absolute bottom-4 left-14 text-xs opacity-60">Sources (main): <a href="https://jumpstarter.dev/main/getting-started/guides/setup/off-cluster-qemu.html">QEMU provisioners</a> · <a href="https://jumpstarter.dev/main/getting-started/guides/kubevirt-provisioner.html">KubeVirt</a> · <a href="https://jumpstarter.dev/main/reference/crds/exporterset.html">ExporterSet</a></div>
 
 ---
 layout: two-cols-header
