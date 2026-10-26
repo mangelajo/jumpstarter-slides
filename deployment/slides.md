@@ -43,16 +43,16 @@ layout: default
 <div class="flex gap-3 items-start">
   <span class="font-bold text-[#ffc107] shrink-0">02</span>
   <div>
-    <p class="font-semibold">Running the service</p>
-    <p class="text-sm opacity-70">Where it runs, operator, networking, security</p>
+    <p class="font-semibold">The shared lab</p>
+    <p class="text-sm opacity-70">Three jobs and a peek at RHIVOS</p>
   </div>
 </div>
 
 <div class="flex gap-3 items-start">
   <span class="font-bold text-[#ffc107] shrink-0">03</span>
   <div>
-    <p class="font-semibold">Exporter hosts</p>
-    <p class="text-sm opacity-70">Sidekick, lab-config, FlightCTL / RHEM</p>
+    <p class="font-semibold">Running the service</p>
+    <p class="text-sm opacity-70">Options, operator install, networking, security</p>
   </div>
 </div>
 
@@ -67,32 +67,24 @@ layout: default
 <div class="flex gap-3 items-start">
   <span class="font-bold text-[#ffc107] shrink-0">05</span>
   <div>
-    <p class="font-semibold">Virtual targets and CI</p>
-    <p class="text-sm opacity-70">Compute placement, attached vs shared lab</p>
+    <p class="font-semibold">Exporter hosts</p>
+    <p class="text-sm opacity-70">Sidekick, lab-config, FlightCTL / RHEM</p>
   </div>
 </div>
 
 <div class="flex gap-3 items-start">
   <span class="font-bold text-[#ffc107] shrink-0">06</span>
   <div>
-    <p class="font-semibold">Verify and choose</p>
-    <p class="text-sm opacity-70">Smoke tests and the smallest fit</p>
+    <p class="font-semibold">Installing the client</p>
+    <p class="text-sm opacity-70">pip and the one-liner installer</p>
   </div>
 </div>
 
 <div class="flex gap-3 items-start">
   <span class="font-bold text-[#ffc107] shrink-0">07</span>
   <div>
-    <p class="font-semibold">Installing the client</p>
-    <p class="text-sm opacity-70">Installer, pip, and containers</p>
-  </div>
-</div>
-
-<div class="flex gap-3 items-start">
-  <span class="font-bold text-[#ffc107] shrink-0">08</span>
-  <div>
-    <p class="font-semibold">References</p>
-    <p class="text-sm opacity-70">Official docs and next steps</p>
+    <p class="font-semibold">Community</p>
+    <p class="text-sm opacity-70">Links and next steps</p>
   </div>
 </div>
 
@@ -387,7 +379,7 @@ flowchart LR
 
 <div class="border-l-3 border-[#ffc107] pl-3">
   <div class="font-semibold leading-tight">Why</div>
-  <div class="opacity-75 text-xs leading-tight">Production-ready, battle tested, HA through OpenShift/Kubernetes, [OIDC integration](https://jumpstarter.dev/main/getting-started/configuration/authentication.html), telemetry, [cert-manager](https://cert-manager.io/) management, GitOps.
+  <div class="opacity-75 text-xs leading-tight">Production-ready, battle tested, HA through OpenShift/Kubernetes, <a href="https://jumpstarter.dev/main/getting-started/configuration/authentication.html">OIDC integration</a>, telemetry, <a href="https://cert-manager.io/">cert-manager</a> management, GitOps.
   The operator can also receive updates via OLM/OperatorHub</div>
 </div>
 
@@ -806,5 +798,5 @@ jmp version
 <p class="text-xs opacity-60">Source: <a href="https://jumpstarter.dev/main/getting-started/installation/packages.html">Package installation</a> — release and main package indexes are separate; choose a compatible client/service version.</p>
 
 ---
-src: ../common/slides/community.md
+src: ./community.md
 ---
